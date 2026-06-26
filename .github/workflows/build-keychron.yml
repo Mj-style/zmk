@@ -1,0 +1,55 @@
+name: Build Keychron B1 Pro Firmware
+
+on:
+  push:
+      branches:
+            - keychron_bpro
+                paths:
+                      - 'app/**'
+                            - '.github/workflows/build-keychron.yml'
+                              workflow_dispatch:
+
+                              jobs:
+                                build:
+                                    runs-on: ubuntu-latest
+                                        container:
+                                              image: docker.io/zmkfirmware/zmk-build-arm:3.2
+                                                  steps:
+                                                        - name: Checkout
+                                                                uses: actions/checkout@v3
+
+                                                                      - name: Cache west modules
+                                                                              uses: actions/cache@v3
+                                                                                      with:
+                                                                                                path: |
+                                                                                                            modules/
+                                                                                                                        tools/
+                                                                                                                                    zephyr/
+                                                                                                                                                bootloader/
+                                                                                                                                                          key: ${{ runner.os }}-zmk-${{ hashFiles('app/west.yml') }}
+                                                                                                                                                                    restore-keys: |
+                                                                                                                                                                                ${{ runner.os }}-zmk-
+                                                                                                                                                                                        timeout-minutes: 2
+                                                                                                                                                                                                continue-on-error: true
+                                                                                                                                                                                                
+                                                                                                                                                                                                      - name: West Init
+                                                                                                                                                                                                              run: west init -l app
+                                                                                                                                                                                                              
+                                                                                                                                                                                                                    - name: West Update
+                                                                                                                                                                                                                            run: west update
+                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                  - name: West Zephyr Export
+                                                                                                                                                                                                                                          run: west zephyr-export
+                                                                                                                                                                                                                                          
+                                                                                                                                                                                                                                                - name: Build firmware
+                                                                                                                                                                                                                                                        run: west build -s app -p -b keychron
+                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                              - name: Upload firmware artifact
+                                                                                                                                                                                                                                                                      uses: actions/upload-artifact@v3
+                                                                                                                                                                                                                                                                              with:
+                                                                                                                                                                                                                                                                                        name: keychron-b1pro-zmk
+                                                                                                                                                                                                                                                                                                  path: |
+                                                                                                                                                                                                                                                                                                              build/zephyr/zmk.uf2
+                                                                                                                                                                                                                                                                                                                          build/zephyr/zmk.hex
+                                                                                                                                                                                                                                                                                                                                    if-no-files-found: warn
+                                                                                                                                                                                                                                                                                                                                    
