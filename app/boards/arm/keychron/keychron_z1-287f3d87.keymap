@@ -316,16 +316,17 @@
         caps_layer {
             bindings = <
             // Row 1: Fn keys - all transparent
-                &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+                &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
                 // Row 2: Number row - 4/$ = \;\&\;
-                &trans &trans &trans &trans &semicol_and_semicol &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+                &trans &trans &trans &trans &semicol_and_semicol &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
                 // Row 3: QWERTY - E=\exists  T=\therefore  I=\int
-                &trans &trans &trans &exists_str &trans &therefore_str &trans &trans &int_str &trans &trans &trans &trans &trans &trans &trans &trans
+                &trans &trans &trans &exists_str &trans &therefore_str &trans &trans &int_str &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
                 // Row 4: ASDF - S=\sum  D=\ddots  F=\;\forall\;
-                &trans &trans &sum_str &ddots_str &forall_str &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+                &trans &trans &sum_str &ddots_str &forall_str &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
                 // Row 5: ZXCV - NUBS=\;|\;  C=\cdots  V=\vdots  B=\because
-                &trans &semicol_pipe_semicol &trans &trans &cdots_str &vdots_str &because_str &trans &trans &trans &trans &trans &trans
+                &trans &semicol_pipe_semicol &trans &trans &cdots_str &vdots_str &because_str &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
                 //
+			&trans	&trans		&trans			&trans		&trans			&trans			&trans			&trans		&trans		&trans			&trans				&trans		&trans		&trans
                 &none &none &none &none &none
             >;
         };
